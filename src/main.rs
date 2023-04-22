@@ -11,8 +11,8 @@ fn main() {
     // creates immutable random number between 1 and 100, inclusive on lower and upper bounds
     let secret_number: u32 = fastrand::u32(1..=100);
 
-    // for initial dev, secret_number will be printed so we can predict behavior better
-    println!("The secret number is {secret_number}");
+    // uncomment for debugging
+    // println!("The secret number is {secret_number}");
 
     loop {
         println!("Please input your guess.");
@@ -38,13 +38,15 @@ fn main() {
             .expect("Failed to read line");
 
         // Rust allows shadowing, so multiple variables of the same name can exist as different types
-        let guess: u32 = guess
-            // eliminate whitespace at beginning and end
-            .trim()
-            // convert string to another type
-            .parse()
-            // error message
-            .expect("Please type a number!");
+        let guess: u32 = match 
+            // trim = eliminate whitespace at beginning and end
+            // parse = convert string to another type
+            guess.trim().parse(){
+                // if Ok, use the number
+                Ok(num) => num,
+                // if error of any kind (_ is a catchall), go to the next iteration of the loop
+                Err(_) => continue,
+            };
 
         // {} placeholder for the value of the variable
         // for multiple placeholders, format is prinln!("x = {} and y = {}", x, y);
@@ -55,7 +57,12 @@ fn main() {
             // define what to do for each variant on separate arms
             // each arm inclues pattern to match against (like Less) and what to do if true
             Ordering::Less => println!("Too small!"),
-            Ordering::Equal => println!("You win!"),
+            Ordering::Equal => {
+                println!("You win!");
+                // stops running the program
+                break;
+            }
+            // last variant in the list still ends with a comma
             Ordering::Greater => println!("Too big!"),
         }
     }
