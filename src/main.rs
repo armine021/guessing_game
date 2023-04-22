@@ -4,6 +4,7 @@ use std::io;
 
 fn main() {
     println!("Guess the number!");
+
     println!("Please input your guess.");
 
     // let creates a new variable of the specified name "guess"
@@ -11,10 +12,18 @@ fn main() {
     // :: indicates "new" is an associated function of String
     let mut guess = String::new();
 
+    // The Book uses rand library, but fastrand is smaller and faster
+    // creates immutable random number between 1 and 100, inclusive on lower and upper bounds
+    let secret_number = fastrand::i32(1..=100);
+
+    // for initial dev, secret_number will be printed so we can predict behavior better
+    println!("The secret number is {secret_number}");
+
+
     // calls the stdin function from the io module
     // if it hadn't been use called earlier, could run with std::io::stdin
     io::stdin()
-        // calls read_lines method on the standard input handle
+        // calls read_line method on the standard input handle
         // "&mut guess" argument tells where to store the input
         // "&" indicates a reference to avoid copying data into memory multiple times
         // referenes are immutable by default (like variables), so use &mut to make mutable
