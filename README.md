@@ -2,6 +2,8 @@
 
 Simple Rust program for a guessing game. Given an input, provide high/low/equal feedback. Includes basic input validation.
 
+This project is extremely over-commented compared to normal work. Excess notes are included for learning a new language.
+
 Goals:
 
 1. Generate a secret number to guess.
@@ -12,3 +14,5 @@ Goals:
 Based on Chapter 2 of the The Rust Programming Language (aka "The Book") except using fastrand instead of rand.
 
 https://rust-book.cs.brown.edu/ch02-00-guessing-game-tutorial.html
+
+ 
